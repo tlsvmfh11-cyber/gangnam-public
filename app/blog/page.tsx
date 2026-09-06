@@ -12,11 +12,18 @@ import { absoluteUrl } from "@/lib/site";
 import { breadcrumbList, buildMetadata, webPageLd } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "강남 퍼블릭 인사이트 & 가이드",
+  title: "강남 퍼블릭 가이드 | 첫 방문·업종 차이·역삼동·용어",
   description:
-    "퍼블릭 처음 방문 체크리스트, 퍼블릭과 하이퍼블릭 차이, 역삼동 지역 가이드, 업종 용어 정리를 검색 의도별로 나눠 안내합니다.",
+    "강남 퍼블릭 가이드는 코어 페이지에 넣지 않은 질문만 다룹니다. 처음 방문 전에 정해 둘 것과 챙길 것, 퍼블릭과 하이퍼블릭이 초이스·비용대에서 어떻게 다른지, 역삼동에서 지번 주소로 위치를 특정하는 방법, 초이스·체인지·주대·TC 같은 용어의 뜻을 글마다 하나씩 정리했습니다.",
   path: "/blog",
   ogImage: images.roomStyles,
+  titleAbsolute: true,
+  keywords: [
+    "퍼블릭 가이드",
+    "퍼블릭 처음 방문",
+    "퍼블릭 하이퍼블릭 차이",
+    "퍼블릭 용어",
+  ],
 });
 
 const jsonLd = {

@@ -4,7 +4,13 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { JsonLd } from "@/components/json-ld";
 import { defaultOgImage } from "@/lib/images";
-import { absoluteUrl, getSiteUrl, siteConfig } from "@/lib/site";
+import {
+  absoluteUrl,
+  getSiteUrl,
+  googleSiteVerification,
+  searchKeywords,
+  siteConfig,
+} from "@/lib/site";
 import { localBusinessLd } from "@/lib/seo";
 import "./globals.css";
 
@@ -25,37 +31,51 @@ const serif = Noto_Serif_KR({
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
-    default: `${siteConfig.name} | 역삼동 퍼블릭 24시간`,
+    default: `${siteConfig.name} | 역삼동 퍼블릭 24시간 영업`,
     template: `%s | ${siteConfig.name}`,
   },
   description:
-    "서울특별시 강남구 역삼동의 퍼블릭. 24시간 영업. 퍼블릭 시스템과 초이스, 비용 구성, 예약 방법을 확인된 정보 기준으로 안내합니다.",
+    "강남 퍼블릭은 서울특별시 강남구 역삼동 604-11에서 24시간 영업하는 퍼블릭입니다. 룸에 앉아 이용하는 형태와 초이스, 비용 구성, 예약 문의 방법을 확인된 정보만으로 안내합니다. 검색에 같이 나오는 다른 상호·다른 주소의 업소와는 구분해서 보시면 되고, 실제 금액과 룸 구성은 인원과 시간대를 알려 주시면 전화로 확인하실 수 있습니다.",
   applicationName: siteConfig.name,
   authors: [{ name: siteConfig.author }],
-  keywords: [
-    siteConfig.name,
-    "퍼블릭",
-    "역삼동 퍼블릭",
-    "강남 퍼블릭 시스템",
-    "강남 퍼블릭 예약",
-  ],
+  keywords: [...searchKeywords],
+  verification: {
+    google: googleSiteVerification,
+  },
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
   openGraph: {
     type: "website",
     locale: siteConfig.locale,
+    url: absoluteUrl("/"),
     siteName: siteConfig.name,
     images: [
       {
         url: defaultOgImage.src,
-        width: 1536,
-        height: 1024,
+        width: defaultOgImage.width,
+        height: defaultOgImage.height,
         alt: defaultOgImage.alt,
       },
     ],
   },
   twitter: { card: "summary_large_image" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export const viewport: Viewport = {
@@ -71,7 +91,11 @@ const siteLd = {
       "@id": `${absoluteUrl("/")}#website`,
       url: absoluteUrl("/"),
       name: siteConfig.name,
+      alternateName: siteConfig.alternateName,
+      description:
+        "강남 퍼블릭 안내. 서울 강남구 역삼동 604-11, 24시간 영업. 시스템·초이스·비용 구성·예약.",
       inLanguage: "ko-KR",
+      about: { "@id": `${absoluteUrl("/")}#business` },
       publisher: { "@id": `${absoluteUrl("/")}#business` },
     },
     localBusinessLd(),

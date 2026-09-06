@@ -22,11 +22,19 @@ import { breadcrumbList, buildMetadata, faqPageLd, webPageLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "강남 퍼블릭 소개 | 역삼동 퍼블릭 24시간 영업",
+  title: "강남 퍼블릭 | 역삼동 퍼블릭 24시간 영업",
   description:
-    "강남 퍼블릭은 서울특별시 강남구 역삼동 604-11의 퍼블릭입니다. 퍼블릭이 어떤 형태인지, 이용 흐름과 초이스, 비용 구성과 예약 방법을 확인된 정보 기준으로 정리했습니다.",
+    "강남 퍼블릭은 서울특별시 강남구 역삼동 604-11에서 24시간 영업하는 퍼블릭입니다. 룸에 앉아 이용하는 형태와 초이스, 비용 구성, 예약 문의 방법을 확인된 정보만으로 안내합니다. 검색에 같이 나오는 다른 상호·다른 주소의 업소와는 구분해서 보시면 되고, 실제 금액과 룸 구성은 인원과 시간대를 알려 주시면 전화로 확인하실 수 있습니다.",
   path: "/",
   ogImage: images.hero,
+  titleAbsolute: true,
+  keywords: [
+    "강남 퍼블릭",
+    "강남퍼블릭",
+    "역삼동 퍼블릭",
+    "강남 퍼블릭 예약",
+    "강남 퍼블릭 위치",
+  ],
 });
 
 const jsonLd = {
@@ -34,11 +42,12 @@ const jsonLd = {
   "@graph": [
     webPageLd({
       path: "/",
-      name: "강남 퍼블릭 소개",
+      name: "강남 퍼블릭",
       description:
-        "역삼동 퍼블릭 강남 퍼블릭 소개. 업종 설명, 이용 흐름, 초이스, 비용 구성, 24시간 영업과 예약 안내.",
+        "강남 퍼블릭은 서울 강남구 역삼동 604-11의 퍼블릭입니다. 24시간 영업, 이용 흐름, 초이스, 비용 구성, 예약 안내.",
+      type: "AboutPage",
     }),
-    breadcrumbList([{ name: "강남 퍼블릭 소개", path: "/" }]),
+    breadcrumbList([{ name: "강남 퍼블릭", path: "/" }]),
     faqPageLd(homeFaqs),
   ],
 };
@@ -64,7 +73,7 @@ export default function HomePage() {
             <div>
               <p className="flex flex-wrap items-center gap-2">
                 {[
-                  siteConfig.region.neighborhood,
+                  siteConfig.addressShort,
                   siteConfig.category,
                   siteConfig.hours,
                 ].map((chip) => (
@@ -77,8 +86,11 @@ export default function HomePage() {
                 ))}
               </p>
               <h1 className="mt-4 font-serif text-[2.1rem] leading-tight text-[#f7f2e8] sm:text-[3.1rem]">
-                강남 퍼블릭 소개
+                강남 퍼블릭
               </h1>
+              <p className="mt-3 text-base leading-7 text-[#e3c982] sm:text-lg">
+                {siteConfig.address} · {siteConfig.hours} 영업
+              </p>
               <Tldr text={homeTldr} />
             </div>
             <div className="relative aspect-[3/2] overflow-hidden rounded-3xl bg-[#17140f] ring-1 ring-[#c8a24a]/20">

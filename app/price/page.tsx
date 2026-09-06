@@ -16,9 +16,16 @@ import { breadcrumbList, buildMetadata, faqPageLd, webPageLd } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "강남 퍼블릭 가격 | 비용 구성과 총액 확인 방법",
   description:
-    "강남 퍼블릭 비용이 룸비·주대·TC로 어떻게 구성되는지, 총액을 바꾸는 변수는 무엇인지, 예약 문의에서 무엇을 물어보면 총액이 한 번에 확인되는지 정리했습니다.",
+    "강남 퍼블릭 가격은 인원, 이용 시간, 방문 시간대에 따라 총액이 달라져 사이트에 금액을 적지 않았습니다. 대신 룸비·주대·TC가 각각 어떤 비용인지, 총액을 가장 크게 바꾸는 변수는 무엇인지, 예약 문의에서 무엇을 물어보면 한 번에 확인되는지를 정리했습니다. 견적은 조건을 말한 뒤 총액 기준으로 확인하시는 편이 정확합니다.",
   path: "/price",
   ogImage: images.drinkSetup,
+  titleAbsolute: true,
+  keywords: [
+    "강남 퍼블릭 가격",
+    "퍼블릭 룸비",
+    "퍼블릭 주대",
+    "퍼블릭 비용",
+  ],
 });
 
 const jsonLd = {

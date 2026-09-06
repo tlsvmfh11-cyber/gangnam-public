@@ -7,6 +7,8 @@ import { join } from "node:path";
 
 const OUT = ".next/server/app";
 const PHONE_DIGITS = "01023033778";
+const SITE_ORIGIN = "https://www.gnpublics.com";
+const GOOGLE_VERIFICATION = "gJIZPgjEJ8ueNroDyWpUcQD08zhqzD9Jmpr7FiFr7Tw";
 
 const pages = [
   { file: "index.html", route: "/" },
@@ -121,6 +123,15 @@ for (const { file, route } of pages) {
   if (!twitterCard) fail(route, "twitter:card 없음");
   if (!robotsTag || !/index/.test(robotsTag)) fail(route, "robots meta 없음");
 
+  const verifyTag = html.match(/<meta name="google-site-verification"[^>]*>/i)?.[0] ?? null;
+  const verify = verifyTag ? attr(verifyTag, "content") : null;
+  if (verify !== GOOGLE_VERIFICATION) {
+    fail(route, `google-site-verification 없음 또는 불일치`);
+  }
+
+  const keywordsTag = html.match(/<meta name="keywords"[^>]*>/i)?.[0] ?? null;
+  if (!keywordsTag) fail(route, "keywords 검색태그 없음");
+
   if (title) {
     if (titles.has(title)) fail(route, `title 중복 (${titles.get(title)})`);
     else titles.set(title, route);
@@ -134,6 +145,9 @@ for (const { file, route } of pages) {
     else canonicals.set(canon, route);
     // 루트는 오리진 그대로(후행 슬래시 없음), 나머지는 경로가 그대로 붙어야 합니다.
     const origin = canon.replace(/^(https?:\/\/[^/]+).*$/, "$1");
+    if (origin !== SITE_ORIGIN) {
+      fail(route, `canonical 도메인 불일치: ${origin} (기대: ${SITE_ORIGIN})`);
+    }
     const expected = route === "/" ? origin : `${origin}${route}`;
     if (canon !== expected) {
       fail(route, `canonical self-reference 불일치: ${canon} (기대: ${expected})`);
@@ -237,7 +251,19 @@ for (const [label, path] of [
   }
   const body = readFileSync(path, "utf8");
   if (/localhost/.test(body)) problems.push(`${label}: localhost 포함`);
+  if (/gangnam-public\.example/.test(body)) {
+    problems.push(`${label}: 예시 도메인 포함`);
+  }
+  if (!body.includes(SITE_ORIGIN)) {
+    problems.push(`${label}: ${SITE_ORIGIN} 없음`);
+  }
   if (label === "sitemap.xml") {
+    if (!body.includes("<lastmod>")) {
+      problems.push("sitemap.xml: lastmod 없음");
+    }
+    if (!body.includes("2026-09-07")) {
+      problems.push("sitemap.xml: lastmod가 2026-09-07가 아님");
+    }
     const urls = [...body.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) =>
       m[1].replace(/^https?:\/\/[^/]+/, "") || "/",
     );

@@ -18,14 +18,21 @@ import {
   localBusinessLd,
   webPageLd,
 } from "@/lib/seo";
-import { siteConfig } from "@/lib/site";
+import { mapsSearchUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "강남 퍼블릭 예약 | 주소·24시간 영업·문의",
+  title: "강남 퍼블릭 예약 | 역삼동 604-11 · 24시간",
   description:
-    "강남 퍼블릭 예약은 전화 문의로 진행합니다. 주소는 서울특별시 강남구 역삼동 604-11, 영업시간은 24시간입니다. 예약 전 확인사항과 처음 방문·1인 방문 문의 방법을 안내합니다.",
+    "강남 퍼블릭 예약은 전화 문의로 진행합니다. 주소는 서울특별시 강남구 역삼동 604-11이고 영업시간은 24시간이므로 심야와 이른 시간에도 문의할 수 있습니다. 방문 날짜, 도착 시간, 인원, 처음 방문 여부, 예산 범위를 정리해 두면 통화가 짧아집니다. 1인 방문과 위치, 차량 관련 항목도 같은 번호로 확인하시면 됩니다.",
   path: "/contact",
   ogImage: images.og,
+  titleAbsolute: true,
+  keywords: [
+    "강남 퍼블릭 예약",
+    "역삼동 퍼블릭 위치",
+    "강남 퍼블릭 영업시간",
+    "강남 퍼블릭 문의",
+  ],
 });
 
 const jsonLd = {
@@ -47,9 +54,7 @@ const jsonLd = {
   ],
 };
 
-const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  siteConfig.address,
-)}`;
+const mapHref = mapsSearchUrl();
 
 export default function ContactPage() {
   return (

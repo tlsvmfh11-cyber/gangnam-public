@@ -26,6 +26,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-4 sm:px-6">
         <Link
           href="/"
+          aria-label="강남 퍼블릭 홈"
           className="flex min-h-11 flex-col justify-center font-serif text-lg tracking-wide text-[#f2ece1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e3c982]"
         >
           {siteConfig.name}

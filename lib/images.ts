@@ -28,7 +28,7 @@ export const images = {
   /** 홈 LCP 이미지 — 룸 전체가 보이는 가장 넓은 구도 */
   hero: image(
     "/images/gangnam-public-hero.webp",
-    "우드 패널 벽과 대리석 테이블, 마이크 스탠드와 대형 화면이 놓인 넓은 룸. 한 사람이 테이블 옆에 서 있다.",
+    "강남 퍼블릭 안내용 참고 이미지. 우드 패널 벽과 대리석 테이블, 마이크 스탠드와 대형 화면이 놓인 넓은 룸. 한 사람이 테이블 옆에 서 있다.",
   ),
   /** 기본 대표 이미지(og:image, LocalBusiness image) */
   og: image(

@@ -15,9 +15,16 @@ import { breadcrumbList, buildMetadata, faqPageLd, webPageLd } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "강남 퍼블릭 시스템 | 이용 순서와 초이스 안내",
   description:
-    "강남 퍼블릭 이용 순서를 예약 문의부터 정산까지 여섯 단계로 정리했습니다. 초이스 진행 방식과 체인지 기준, 1인·여러 명 방문, 이용 전 체크사항을 함께 안내합니다.",
+    "강남 퍼블릭 이용 순서를 예약 문의, 입장, 룸 안내, 초이스, 룸타임, 정산까지 여섯 단계로 정리했습니다. 초이스와 체인지가 어떻게 진행되는지, 처음 방문과 1인·여러 명 방문에서 무엇을 확인하면 되는지를 업종 일반 기준으로 풀어 썼습니다. 이 업소의 확정 운영 방식과 조건은 예약 문의에서 확인하시면 됩니다.",
   path: "/system",
   ogImage: images.hero,
+  titleAbsolute: true,
+  keywords: [
+    "강남 퍼블릭 시스템",
+    "퍼블릭 초이스",
+    "퍼블릭 이용 순서",
+    "강남 퍼블릭 체인지",
+  ],
 });
 
 const jsonLd = {

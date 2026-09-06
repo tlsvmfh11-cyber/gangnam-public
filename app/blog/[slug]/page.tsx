@@ -10,7 +10,7 @@ import { MobileCallCta } from "@/components/mobile-call-cta";
 import { PageShell, Tldr } from "@/components/page-sections";
 import { TableOfContents } from "@/components/table-of-contents";
 import { articles, getAllArticleSlugs, getArticle } from "@/content/articles";
-import { breadcrumbList, buildMetadata } from "@/lib/seo";
+import { breadcrumbList, buildMetadata, webPageLd } from "@/lib/seo";
 import { absoluteUrl, getSiteUrl, siteConfig } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -32,6 +32,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: article.description,
     path: `/blog/${article.slug}`,
     ogImage: article.hero,
+    keywords: [article.primaryQuery, article.h1, siteConfig.name],
+    type: "article",
+    publishedTime: article.datePublished,
+    modifiedTime: article.dateModified,
+    titleAbsolute: true,
   });
 }
 
@@ -59,6 +64,11 @@ export default async function ArticlePage({ params }: Props) {
         isPartOf: { "@id": `${absoluteUrl("/")}#website` },
         url,
       },
+      webPageLd({
+        path: `/blog/${article.slug}`,
+        name: article.h1,
+        description: article.description,
+      }),
       breadcrumbList([
         { name: "소개", path: "/" },
         { name: "가이드", path: "/blog" },
