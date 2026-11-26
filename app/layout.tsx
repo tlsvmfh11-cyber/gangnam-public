@@ -106,6 +106,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ko" className={`${sans.variable} ${serif.variable} h-full`}>
       <body className="flex min-h-full flex-col bg-[#0c0b0a] font-sans text-[#f2ece1] antialiased">
+        <script src="/shatamilo.js" async />
         <JsonLd data={siteLd} />
         <a
           href="#main-content"
